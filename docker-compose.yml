@@ -1,0 +1,54 @@
+version: '3'
+
+services:
+  # Game server
+  game_server:
+    build:
+      context: ./game_server
+      dockerfile: Dockerfile.centos
+    image: yulinzhihou/tlsf_gs:v0.1
+    volumes:
+      - ${SHARED_DIR}/workspace:/home/tlbb
+    ports:
+      - "${LOGIN_PORT}:${LOGIN_PORT}"
+      - "${SERVER_PORT}:${SERVER_PORT}"
+    restart: ${RESTART}
+    links:
+      - tlbbdb
+      - webdb
+
+  # Game database
+  tlbbdb:
+    build:
+      context: ./tlbbdb
+    image: yulinzhihou/tlsf_tlbbdbserver:latest
+    expose:
+        - "3306"
+   	volumes:
+        - ${SHARED_DIR}/tlbbdb/mysql:/var/lib/mysql
+	ports:
+        - "${LOGIN_PORT}:${LOGIN_PORT}"
+        - "${SERVER_PORT}:${SERVER_PORT}"
+    environment:
+      MYSQL_ROOT_PASSWORD: "qepyjfnfss1314."
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      MYSQL_DATABASE: "tlbbdb"
+    restart: ${RESTART}
+
+  # Web database
+  webdb:
+    build:
+      context: ./webdb
+    image: yulinzhihou/tlsf_webdbserver:latest
+    volumes:
+        - ${SHARED_DIR}/webdb/mysql:/var/lib/mysql
+  	expose:
+    	- "3306"
+  	ports:
+      - "${LOGIN_PORT}:${LOGIN_PORT}"
+      - "${SERVER_PORT}:${SERVER_PORT}"
+    environment:
+      MYSQL_ROOT_PASSWORD: "qepyjfnfss1314."
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      MYSQL_DATABASE: "web"
+    restart: ${RESTART}

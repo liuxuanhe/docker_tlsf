@@ -1,0 +1,26 @@
+###################################
+# Path shared in host OS
+#
+# Window Host OS:
+# (+) Docker ToolBox:
+# Settings of docker-machine VirtualBox Image (default) -> Shared Folders
+# -> Add -> Host OS Path -> DockerTLBB -> Auto-mount -> OK
+# The env will be:
+# SHARED_DIR=/DockerTLBB
+#
+# Linux Host OS:
+# SHARED_DIR=.
+#
+###################################
+SHARED_DIR=/DockerTLBB
+
+# ServerInfo.ini > [Server1] > PORT0
+LOGIN_PORT=7775
+
+# ServerInfo.ini > [Server0] > PORT0
+SERVER_PORT=7776
+
+# HOST_MYSQL_PORT=3306
+
+RESTART=always
+
