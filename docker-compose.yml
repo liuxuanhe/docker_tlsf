@@ -23,12 +23,12 @@ services:
       context: ./tlbbdb
     image: yulinzhihou/tlsf_tlbbdbserver:latest
     expose:
-        - "3306"
+      - "3306"
    	volumes:
-        - ${SHARED_DIR}/tlbbdb/mysql:/var/lib/mysql
+      - ${SHARED_DIR}/tlbbdb/mysql:/var/lib/mysql
 	ports:
-        - "${LOGIN_PORT}:${LOGIN_PORT}"
-        - "${SERVER_PORT}:${SERVER_PORT}"
+      - "${LOGIN_PORT}:${LOGIN_PORT}"
+      - "${SERVER_PORT}:${SERVER_PORT}"
     environment:
       MYSQL_ROOT_PASSWORD: "qepyjfnfss1314."
       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
@@ -41,9 +41,9 @@ services:
       context: ./webdb
     image: yulinzhihou/tlsf_webdbserver:latest
     volumes:
-        - ${SHARED_DIR}/webdb/mysql:/var/lib/mysql
+      - ${SHARED_DIR}/webdb/mysql:/var/lib/mysql
   	expose:
-    	- "3306"
+      - "3306"
   	ports:
       - "${LOGIN_PORT}:${LOGIN_PORT}"
       - "${SERVER_PORT}:${SERVER_PORT}"
