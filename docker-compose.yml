@@ -5,7 +5,7 @@ services:
   game_server:
     build:
       context: ./game_server
-      dockerfile: game_server/Dockerfile
+      dockerfile: Dockerfile
     image: yulinzhihou/tlsf_gs:v0.1
     volumes:
       - ${SHARED_DIR}/workspace:/home/tlbb
@@ -22,19 +22,23 @@ services:
     build:
       context: ./tlbbdb
     image: yulinzhihou/tlsf_tlbbdbserver:latest
+    # volumes:
+    #   - ${SHARED_DIR}/tlbbdb/mysql:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: "qepyjfnfss1314."
       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
       MYSQL_DATABASE: "tlbbdb"
     restart: ${RESTART}
 
-    # Web database
-    webdb:
-      build:
-        context: ./webdb
-      image: yulinzhihou/tlsf_webdbserver:latest
-        environment:
-          MYSQL_ROOT_PASSWORD: "qepyjfnfss1314."
-          MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
-          MYSQL_DATABASE: "web"
-        restart: ${RESTART}
+  # Web database
+  webdb:
+    build:
+      context: ./webdb
+    image: yulinzhihou/tlsf_webdbserver:latest
+    # volumes:
+    #   - ${SHARED_DIR}/webdb/mysql:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: "qepyjfnfss1314."
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      MYSQL_DATABASE: "web"
+    restart: ${RESTART}
