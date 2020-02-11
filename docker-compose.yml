@@ -22,8 +22,6 @@ services:
     build:
       context: ./tlbbdb
     image: yulinzhihou/tlsf_tlbbdbserver:latest
-    expose:
-      - "3306"
     volumes:
       - ${SHARED_DIR}/tlbbdb/mysql:/var/lib/mysql
     environment:
@@ -39,8 +37,6 @@ services:
       image: yulinzhihou/tlsf_webdbserver:latest
       volumes:
         - ${SHARED_DIR}/webdb/mysql:/var/lib/mysql
-      expose:
-        - "3306"
         environment:
           MYSQL_ROOT_PASSWORD: "qepyjfnfss1314."
           MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
