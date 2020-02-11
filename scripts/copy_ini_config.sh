@@ -1,0 +1,1 @@
+\cp -rf ./config/* /home/tlbb/tlbb/Server/Config/

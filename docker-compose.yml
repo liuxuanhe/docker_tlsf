@@ -16,6 +16,7 @@ services:
     links:
       - tlbbdb
       - webdb
+      - billing
 
   # Game database
   tlbbdb:
@@ -41,4 +42,11 @@ services:
       MYSQL_ROOT_PASSWORD: "qepyjfnfss1314."
       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
       MYSQL_DATABASE: "web"
+    restart: ${RESTART}
+
+  # billing Server
+  billing:
+    build:
+      context: ./billing
+    image: yulinzhihou/tlsf_billing:latest
     restart: ${RESTART}
