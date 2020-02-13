@@ -24,6 +24,8 @@ services:
     image: yulinzhihou/tlsf_tlbbdbserver:latest
     # volumes:
     #   - ${SHARED_DIR}/tlbbdb/mysql:/var/lib/mysql
+    port:
+      - 3306:33060
     environment:
       MYSQL_ROOT_PASSWORD: "qepyjfnfss1314."
       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
@@ -37,6 +39,8 @@ services:
     image: yulinzhihou/tlsf_webdbserver:latest
     # volumes:
     #   - ${SHARED_DIR}/webdb/mysql:/var/lib/mysql
+    port:
+      - 3306:33060
     environment:
       MYSQL_ROOT_PASSWORD: "qepyjfnfss1314."
       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
