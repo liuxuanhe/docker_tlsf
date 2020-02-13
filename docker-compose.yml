@@ -16,7 +16,6 @@ services:
     links:
       - tlbbdb
       - webdb
-      - billing
 
   # Game database
   tlbbdb:
