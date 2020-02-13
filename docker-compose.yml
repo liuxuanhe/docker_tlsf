@@ -40,7 +40,7 @@ services:
     # volumes:
     #   - ${SHARED_DIR}/webdb/mysql:/var/lib/mysql
     ports:
-      - 3306:33060
+      - 3306:33061
     environment:
       MYSQL_ROOT_PASSWORD: "qepyjfnfss1314."
       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
