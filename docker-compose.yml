@@ -22,7 +22,7 @@ services:
   tlbbdb:
     build:
       context: ./tlbbdb
-    image: yulinzhihou/tlsf_tlbbdbserver:latest
+    image: yulinzhihou/tlsf_tlbbdbserver:v0.1
     # volumes:
     #   - ${SHARED_DIR}/tlbbdb/mysql:/var/lib/mysql
     environment:
@@ -35,7 +35,7 @@ services:
   webdb:
     build:
       context: ./webdb
-    image: yulinzhihou/tlsf_webdbserver:latest
+    image: yulinzhihou/tlsf_webdbserver:v0.1
     # volumes:
     #   - ${SHARED_DIR}/webdb/mysql:/var/lib/mysql
     ports:
@@ -45,10 +45,3 @@ services:
       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
       MYSQL_DATABASE: "web"
     restart: ${RESTART}
-
-  # billing Server
-#  billing:
-#    build:
-#      context: ./billing
-#    image: yulinzhihou/tlsf_billing:latest
-#    restart: ${RESTART}
