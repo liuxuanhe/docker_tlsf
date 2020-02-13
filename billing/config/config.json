@@ -1,6 +1,6 @@
 {
   "ip": "127.0.0.1",
-  "port": 51818,
+  "port": 21818,
   "db_host": "webdb",
   "db_port": 3306,
   "db_user": "root",
