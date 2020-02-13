@@ -45,8 +45,8 @@ services:
     restart: ${RESTART}
 
   # billing Server
-  billing:
-    build:
-      context: ./billing
-    image: yulinzhihou/tlsf_billing:latest
-    restart: ${RESTART}
+#  billing:
+#    build:
+#      context: ./billing
+#    image: yulinzhihou/tlsf_billing:latest
+#    restart: ${RESTART}
