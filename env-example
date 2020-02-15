@@ -19,7 +19,7 @@ LOGIN_PORT=13580
 # ServerInfo.ini > [Server0] > PORT0
 SERVER_PORT=15680
 # ServerInfo.ini > [billing] > PORT0
-BILLING_PORT=21818
+# BILLING_PORT=21818
 
 # HOST_MYSQL_PORT=3306
 
