@@ -6,8 +6,7 @@ services:
     build:
       context: ./game_server
       dockerfile: Dockerfile
-    #image: yulinzhihou/tlsf_gs:v0.1
-    image: tlbb/game_server:centos
+    image: yulinzhihou/tlsf_gs:v0.1
     volumes:
       - ${SHARED_DIR}/workspace:/home/tlbb
     ports:
@@ -22,8 +21,7 @@ services:
   tlbbdb:
     build:
       context: ./tlbbdb
-    #image: yulinzhihou/tlsf_tlbbdbserver:v0.1
-    image: tlbb/tlbbdb:latest
+    image: yulinzhihou/tlsf_tlbbdbserver:v0.1
     # volumes:
     #   - ${SHARED_DIR}/tlbbdb/mysql:/var/lib/mysql
     environment:
@@ -36,8 +34,7 @@ services:
   webdb:
     build:
       context: ./webdb
-    #image: yulinzhihou/tlsf_webdbserver:v0.1
-    image: tlbb/webdb:latest
+    image: yulinzhihou/tlsf_webdbserver:v0.1
     # volumes:
     #   - ${SHARED_DIR}/webdb/mysql:/var/lib/mysql
     ports:
