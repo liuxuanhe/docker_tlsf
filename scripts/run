@@ -11,5 +11,6 @@ if [ $? -eq 0 ]; then
 fi
 
 cd ${DIR}/..
-${PREFIX} docker-compose exec -d game_server ./run.sh
+${PREFIX} docker-compose exec -d game_server ./tlbb/run.sh
+${PREFIX} docker-compose exec -d game_server ./billing/biiling &
 

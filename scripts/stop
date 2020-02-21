@@ -11,6 +11,6 @@ if [ $? -eq 0 ]; then
 fi
 
 cd ${DIR}/..
-${PREFIX} docker-compose exec game_server ./stop.sh
+${PREFIX} docker-compose exec game_server ./tlbb/stop.sh
 docker-compose restart game_server
 
