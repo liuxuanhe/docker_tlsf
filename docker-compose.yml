@@ -41,6 +41,7 @@ services:
     - "${SHARED_DIR}/webdb/mysql:/var/lib/mysql"
     ports:
     - "${WEB_MYSQL_PORT}:${WEB_MYSQL_PORT}"
+    - "${HOST_MYSQL_PORT}:${HOST_MYSQL_PORT}"
     environment:
       MYSQL_ROOT_PASSWORD: "qepyjfnfss1314."
       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
