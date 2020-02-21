@@ -8,7 +8,7 @@ services:
       dockerfile: Dockerfile
     image: yulinzhihou/tlsf_gs:v0.1
     volumes:
-      - ${SHARED_DIR}/workspace:/home/tlbb
+      - ${SHARED_DIR}/workspace:/home
     ports:
       - "${LOGIN_PORT}:${LOGIN_PORT}"
       - "${SERVER_PORT}:${SERVER_PORT}"
