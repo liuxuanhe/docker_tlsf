@@ -4,13 +4,11 @@ SCRIPT_NAME=$0
 DIR=$(dirname ${SCRIPT_NAME})
 
 # Use winpty
-PREFIX=
+PREFIX=""
 which winpty > /dev/null 2>&1
 if [ $? -eq 0 ]; then
   PREFIX=winpty
 fi
 
 cd ${DIR}/..
-${PREFIX} docker-compose exec -d game_server ./tlbb/run.sh
-${PREFIX} docker-compose exec -d game_server ./billing/biiling &
-
+${PREFIX} docker-compose exec -d game_server ./run.sh
