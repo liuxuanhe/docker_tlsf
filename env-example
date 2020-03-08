@@ -12,7 +12,7 @@
 # SHARED_DIR=.
 #
 ###################################
-SHARED_DIR=/DockerTLBB
+SHARED_DIR=/TLsf
 
 # ServerInfo.ini > [Server1] > PORT0
 LOGIN_PORT=13580
