@@ -1,1 +1,1 @@
-\cp -rf ./config/* /TLsf/tlbb/Server/Config/
+\cp -rf ./config/* /TLsf/workspace/tlbb/Server/Config/
