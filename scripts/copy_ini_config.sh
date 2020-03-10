@@ -1,1 +1,0 @@
-\cp -rf ./config/* /TLsf/workspace/tlbb/Server/Config/
