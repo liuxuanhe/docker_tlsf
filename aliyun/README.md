@@ -1,4 +1,4 @@
-## 全新一键架设环境开服食用指南
+## 全新一键手工架设环境开服食用指南
 
 - #### 先装一个最新的centos7.x系统，64位。安装过程不进行演示，安装完成后执行以下几条命令。
 
@@ -24,7 +24,7 @@ sudo systemctl daemon-reload
 sudo systemctl restart docker
 
 # step 5: 重启服务器完成后，执行一键执行环境下载
-cd ~ && git clone https://github.com/yulinzhihou/docker_tlsf.git tlsf && chmod -R 777 ~/tlsf && cd ~/tlsf/aliyun && cp env-example .env
+cd ~ && git clone https://gitee.com/yulinzhihou/docker_tlsf.git tlsf && chmod -R 777 ~/tlsf && cd ~/tlsf/aliyun && cp env-example .env
 # step 5: 执行部署命令,一键安装环境，等待10-20分钟左右，出现
 docker-compose up -d
 
@@ -47,7 +47,7 @@ cd ~/tlsf && tar zxf billingSer.tar.gz -C /TLsf/workspace/billing && chown -R ro
 # 修改config.json文件 webdb数据库的端口和用户名，密码
 
 # step 2：上传服务端tlbb.tar.gz或者tlbb.zip并解压到指定目录/TLsf/workspace
-tar zxf tlbb.tar.gz -C /TLsf/workspace && chmod -R 777 /TLsf/workspace
+cd ~ && tar zxf tlbb.tar.gz -C /TLsf/workspace && chmod -R 777 /TLsf/workspace
 #如果是zip格式的执行下面命令
 sudo yum -y install unzip && unzip tlbb.zip -d /TLsf/workspace && chmod -R 777
 
@@ -92,10 +92,21 @@ cd ~/tlsf/aliyun/scripts && ./ssh-game_server.sh
 top
 
 # 查看有如下进程，表示开服成功
+top - 14:10:18 up 44 min,  0 users,  load average: 0.36, 0.29, 0.13
+Tasks:  11 total,   1 running,  10 sleeping,   0 stopped,   0 zombie
+Cpu(s):  7.0%us,  3.2%sy,  0.0%ni, 89.7%id,  0.0%wa,  0.0%hi,  0.1%si,  0.0%st
 
+   PID USER      PR  NI  VIRT  RES  SHR S %CPU %MEM    TIME+  COMMAND                     👌  93 root      20   0 2719m 2.0g  48m S 47.3 25.1   2:16.55 Server                  
+👌  90 root      20   0  725m 360m 3276 S 23.0  4.5   0:39.32 Login                       
+👌  88 root      20   0  592m 523m  94m S  5.0  6.6   0:10.82 World                       
+👌  85 root      20   0  459m 331m 209m S  0.3  4.2   0:01.94 ShareMemory                 
+     1 root      20   0  4152  328  252 S  0.0  0.0   0:00.05 tail                       
+    31 root      20   0 11492 1748 1392 S  0.0  0.0   0:00.04 bash                       
+    42 root      20   0 11492  776  416 S  0.0  0.0   0:00.00 bash                       👌  43 root      20   0  437m  10m 2312 S  0.0  0.1   0:00.02 billing                     
+    53 root      20   0 11492 1748 1388 S  0.0  0.0   0:00.03 bash                       
+   138 root      20   0 11492 1668 1348 S  0.0  0.0   0:00.15 bash                       
+   149 root      20   0 14940 1128  904 R  0.0  0.0   0:00.08 top          
 ```
-
-
 
 - #### billing服务器配置文件参数说明
 
