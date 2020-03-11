@@ -10,7 +10,7 @@ sudo yum-config-manager --add-repo https://mirrors.aliyun.com/docker-ce/linux/ce
 # Step 3: 更新并安装Docker-CE
 sudo yum makecache fast && sudo yum -y install docker-ce docker-compose && systemctl enable docker && sudo systemctl start docker && sudo reboot
 # step 4: 重启服务器完成后，执行一键执行环境下载
-cd ~ && git clone https://github.com/yulinzhihou/docker_tlsf.git tlsf && chmod -R 777 ~/tlsf && cd ~/tlsf && cp env-example .env
+cd ~ && git clone https://github.com/yulinzhihou/docker_tlsf.git tlsf && chmod -R 777 ~/tlsf/aliyun && cd ~/tlsf/aliyun/aliyun && cp env-example .env
 # step 5: 执行部署命令,一键安装环境，等待10-20分钟左右，出现
 docker-compose up -d
 
@@ -38,32 +38,32 @@ tar zxf tlbb.tar.gz -C /TLsf/workspace && chmod -R 777 /TLsf/workspace
 sudo yum -y install unzip && unzip tlbb.zip -d /TLsf/workspace && chmod -R 777
 
 # step 3: 复制配置文件到服务端里面替换，LoginInfo.ini ServerInfo.ini ShareMemInfo.ini
-cd ~/tlsf/scripts && ./modify_ini_config.sh
+cd ~/tlsf/aliyun/scripts && ./modify_ini_config.sh
 # step 3 : 开启验证
-cd ~/tlsf/scripts && ./ssh-game_server.sh
+cd ~/tlsf/aliyun/scripts && ./ssh-game_server.sh
 # 与上面命令分开复制
 cd ../billing && ./billing &
 
 # step 4 : 开服
-cd ~/tlsf/scripts && ./ssh-game_server.sh
+cd ~/tlsf/aliyun/scripts && ./ssh-game_server.sh
 # 与上面命令分开复制
 ./run.sh
 
 # 或者使用分部方式进行调试
 # 打开窗口1
-cd ~/tlsf/scripts && ./ssh-game_server.sh
+cd ~/tlsf/aliyun/scripts && ./ssh-game_server.sh
 cd ../billing && ./billing &
 # 打开窗口2
-cd ~/tlsf/scripts && ./ssh-game_server.sh
+cd ~/tlsf/aliyun/scripts && ./ssh-game_server.sh
 cd Server && ./shm start
 # 打开窗口3
-cd ~/tlsf/scripts && ./ssh-game_server.sh
+cd ~/tlsf/aliyun/scripts && ./ssh-game_server.sh
 cd Server && ./Login
 # 打开窗口4
-cd ~/tlsf/scripts && ./ssh-game_server.sh
+cd ~/tlsf/aliyun/scripts && ./ssh-game_server.sh
 cd Server && ./World
 # 打开窗口5
-cd ~/tlsf/scripts && ./ssh-game_server.sh
+cd ~/tlsf/aliyun/scripts && ./ssh-game_server.sh
 cd Server && ./Server
 
 # step 4 ：至此服务端环境全部搭建完成，loginPort 13580 gamePort 15680
@@ -74,7 +74,7 @@ cd Server && ./Server
 
 ```shell
 # 打开窗口1
-cd ~/tlsf/scripts && ./ssh-game_server.sh
+cd ~/tlsf/aliyun/scripts && ./ssh-game_server.sh
 top
 
 # 查看有如下进程，表示开服成功
@@ -142,7 +142,7 @@ docker stop tlsf_game_server_1 && docker rm tlsf_game_server_1 && docker stop tl
 # step 2 : 上传服务端文件，解压并给相应权限
 tar zxf tlbb.tar.gz -C /TLsf/workspace && chown -R root:root tlbb && chmod -R 777 /DockerTLBB/workspace
 # step 3 ： 将上一版本的服务端备份，改名。
-cd ~/tlsf/script && ./modify_ini_config.sh
+cd ~/tlsf/aliyun/script && ./modify_ini_config.sh
 
 # 特别提醒：有时候替换的文件可能不完全兼容，需要重新解压服务端进行手动修改以下三个文件的相关配置信息。
 ServerInfo.ini #修改billing的ip与端口
@@ -150,7 +150,7 @@ ShareMemInfo.ini #修改数据库ip与用户名，密码。
 LoginInfo.ini #修改数据库ip与用户名，密码。
 
 # step 4 : 运行容器环境
-cd ~/tlsf && docker-compose up -d
+cd ~/tlsf/aliyun && docker-compose up -d
 # 出现如下表示已经安装完成
 Successfully built cdab3aeef0cd
 Successfully tagged yulinzhihou/tlsf_gs:v0.1
@@ -162,28 +162,28 @@ Creating tlsf_game_server_1 ... done
 
 # step 5 : 开服命令走一波，如果是测试不确定的残端，建议先使用分开开服的命令进行，以查明是否有报错
 # 打开窗口1
-cd ~/tlsf/scripts && ./ssh-game_server.sh
+cd ~/tlsf/aliyun/scripts && ./ssh-game_server.sh
 cd ../billing && ./billing &
 # 打开窗口2
-cd ~/tlsf/scripts && ./ssh-game_server.sh
+cd ~/tlsf/aliyun/scripts && ./ssh-game_server.sh
 ./run.sh
 # 完成后，等待3-5分钟，开服完成。在窗口2中使用top命令查看运行情况，如果进程全部在，则表示已经开服。如果不在。则可能需要进行如下分步开服，看服务端是否出现报错情况。注：如果开服正常，可以进游戏，则可以将终端全部关闭
 
 # 或者使用分部方式进行调试
 # 打开窗口1
-cd ~/tlsf/scripts && ./ssh-game_server.sh
+cd ~/tlsf/aliyun/scripts && ./ssh-game_server.sh
 cd ../billing && ./billing &
 # 打开窗口2
-cd ~/tlsf/scripts && ./ssh-game_server.sh
+cd ~/tlsf/aliyun/scripts && ./ssh-game_server.sh
 cd Server && ./shm start
 # 打开窗口3
-cd ~/tlsf/scripts && ./ssh-game_server.sh
+cd ~/tlsf/aliyun/scripts && ./ssh-game_server.sh
 cd Server && ./Login
 # 打开窗口4
-cd ~/tlsf/scripts && ./ssh-game_server.sh
+cd ~/tlsf/aliyun/scripts && ./ssh-game_server.sh
 cd Server && ./World
 # 打开窗口5
-cd ~/tlsf/scripts && ./ssh-game_server.sh
+cd ~/tlsf/aliyun/scripts && ./ssh-game_server.sh
 cd Server && ./Server
 ```
 
