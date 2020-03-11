@@ -3,14 +3,28 @@
 - #### 先装一个最新的centos7.x系统，64位。安装过程不进行演示，安装完成后执行以下几条命令。
 
 ```shell
-# step 1: 更新系统组件并安装必要的一些系统工具
+# step 1:关闭系统防火墙以及selinux子系统安全设置
+systemctl stop firewalld && systemctl disable firewalld
+sed -i 's#SELINUX=enforcing#SElINUX=disabled#g' /etc/selinux/config
+
+# step 2: 更新系统组件并安装必要的一些系统工具
 sudo yum -y update && yum install -y epel-release yum-utils device-mapper-persistent-data lvm2 wget git vim
-# Step 2: 添加软件源信息
+# Step 3: 添加软件源信息
 sudo yum-config-manager --add-repo https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
-# Step 3: 更新并安装Docker-CE
+# Step 4: 更新并安装Docker-CE
 sudo yum makecache fast && sudo yum -y install docker-ce docker-compose && systemctl enable docker && sudo systemctl start docker && sudo reboot
-# step 4: 重启服务器完成后，执行一键执行环境下载
-cd ~ && git clone https://github.com/yulinzhihou/docker_tlsf.git tlsf && chmod -R 777 ~/tlsf/aliyun && cd ~/tlsf/aliyun/aliyun && cp env-example .env
+
+sudo mkdir -p /etc/docker
+sudo tee /etc/docker/daemon.json <<-'EOF'
+{
+  "registry-mirrors": ["https://f0tv1cst.mirror.aliyuncs.com"]
+}
+EOF
+sudo systemctl daemon-reload
+sudo systemctl restart docker
+
+# step 5: 重启服务器完成后，执行一键执行环境下载
+cd ~ && git clone https://github.com/yulinzhihou/docker_tlsf.git tlsf && chmod -R 777 ~/tlsf && cd ~/tlsf/aliyun && cp env-example .env
 # step 5: 执行部署命令,一键安装环境，等待10-20分钟左右，出现
 docker-compose up -d
 
@@ -29,7 +43,7 @@ Creating tlsf_game_server_1 ... done
 # step 1: 上传billing服务到指定目录/TLsf/workspace
 mkdir -p /TLsf/workspace/billing
 # 将billing文件与config.json文件一同上传到以上创建的目录里面 /TLsf/workspace/billing
-tar zxf billing.tar.gz -C /TLsf/workspace/billing && chown -R root:root /TLsf/workspace/billing && chmod -R 777 /TLsf/workspace/billing
+cd ~/tlsf && tar zxf billingSer.tar.gz -C /TLsf/workspace/billing && chown -R root:root /TLsf/workspace/billing && chmod -R 777 /TLsf/workspace/billing
 # 修改config.json文件 webdb数据库的端口和用户名，密码
 
 # step 2：上传服务端tlbb.tar.gz或者tlbb.zip并解压到指定目录/TLsf/workspace
@@ -39,31 +53,31 @@ sudo yum -y install unzip && unzip tlbb.zip -d /TLsf/workspace && chmod -R 777
 
 # step 3: 复制配置文件到服务端里面替换，LoginInfo.ini ServerInfo.ini ShareMemInfo.ini
 cd ~/tlsf/aliyun/scripts && ./modify_ini_config.sh
-# step 3 : 开启验证
-cd ~/tlsf/aliyun/scripts && ./ssh-game_server.sh
+# step 4 : 开启验证
+cd ~/tlsf/aliyun/scripts && ./ssh-server.sh
 # 与上面命令分开复制
 cd ../billing && ./billing &
 
 # step 4 : 开服
-cd ~/tlsf/aliyun/scripts && ./ssh-game_server.sh
+cd ~/tlsf/aliyun/scripts && ./ssh-server.sh
 # 与上面命令分开复制
 ./run.sh
 
 # 或者使用分部方式进行调试
 # 打开窗口1
-cd ~/tlsf/aliyun/scripts && ./ssh-game_server.sh
+cd ~/tlsf/aliyun/scripts && ./ssh-server.sh
 cd ../billing && ./billing &
 # 打开窗口2
-cd ~/tlsf/aliyun/scripts && ./ssh-game_server.sh
+cd ~/tlsf/aliyun/scripts && ./ssh-server.sh
 cd Server && ./shm start
 # 打开窗口3
-cd ~/tlsf/aliyun/scripts && ./ssh-game_server.sh
+cd ~/tlsf/aliyun/scripts && ./ssh-server.sh
 cd Server && ./Login
 # 打开窗口4
-cd ~/tlsf/aliyun/scripts && ./ssh-game_server.sh
+cd ~/tlsf/aliyun/scripts && ./ssh-server.sh
 cd Server && ./World
 # 打开窗口5
-cd ~/tlsf/aliyun/scripts && ./ssh-game_server.sh
+cd ~/tlsf/aliyun/scripts && ./ssh-server.sh
 cd Server && ./Server
 
 # step 4 ：至此服务端环境全部搭建完成，loginPort 13580 gamePort 15680
