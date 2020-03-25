@@ -30,5 +30,6 @@
 #sed -i '/^DBPassword=*/d' /TLsf/workspace/tlbb/Server/Config/ShareMemInfo.ini
 #sed -i '6iDBPassword=123456' /TLsf/workspace/tlbb/Server/Config/ShareMemInfo.ini
 #
+#sed -i 's/sleep=60/sleep=99999999/g' /TLsf/workspace/tlbb/run.sh
 #yum -y install dos2unix && dos2unix /TLsf/workspace/tlbb/Server/Config/ShareMemInfo.ini && dos2unix /TLsf/workspace/tlbb/Server/Config/LoginInfo.ini
 tar zxf ini.tar.gz -C /TLsf/workspace/tlbb/Server/Config && chmod -R 777 /TLsf/workspace && chown -R root:root /TLsf/workspace
