@@ -9,4 +9,6 @@ docker stop aliyun_webdb_1 && \
 docker rm aliyun_webdb_1 && \
 docker stop aliyun_tlbbdb_1 && \
 docker rm aliyun_tlbbdb_1 && \
-rm -rf /TLsf/workspace/tlbb
+rm -rf /TLsf/workspace/tlbb && \
+cd ~/.tlsf/aliyun && \
+docker-compose up -d
